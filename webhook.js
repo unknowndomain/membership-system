@@ -257,7 +257,7 @@ function grantMembership( member ) {
 				}
 			} );
 
-			Members.update( { _id: member._id }, {
+			Members.updateOne( { _id: member._id }, {
 				$push: {
 					permissions: new_permission
 				}

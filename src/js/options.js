@@ -82,7 +82,7 @@ var Options = {
 		callback();
 	},
 	_save: function( key ) {
-		OptionsDB.update( { key: key }, { value: Options.getText( key ) }, { upsert: true }, function( err, status ) {} );
+		OptionsDB.updateOne( { key: key }, { value: Options.getText( key ) }, { upsert: true }, function( err, status ) {} );
 	},
 	_unset: function( key ) {
 		OptionsDB.remove( { key: key }, function( err, status ) {} );

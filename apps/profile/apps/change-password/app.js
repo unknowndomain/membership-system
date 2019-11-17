@@ -88,7 +88,7 @@ app.post( '/', auth.isLoggedIn, function( req, res ) {
 			}
 
 			auth.generatePassword( req.body.new, function( password ) {
-				Members.update( { _id: user._id }, { $set: {
+				Members.updateOne( { _id: user._id }, { $set: {
 					'password.salt': password.salt,
 					'password.hash': password.hash,
 					'password.iterations': password.iterations,

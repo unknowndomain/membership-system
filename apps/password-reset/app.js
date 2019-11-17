@@ -93,7 +93,7 @@ app.post( '/change-password', function( req, res ) {
 			}
 
 			auth.generatePassword( req.body.password, function( password ) {
-				Members.update( { _id: user._id }, { $set: {
+				Members.updateOne( { _id: user._id }, { $set: {
 					'password.salt': password.salt,
 					'password.hash': password.hash,
 					'password.reset_code': null,

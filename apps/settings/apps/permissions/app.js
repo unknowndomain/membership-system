@@ -114,7 +114,7 @@ app.post( '/:slug/edit', auth.isSuperAdmin, function( req, res ) {
 		}
 	};
 
-	Permissions.update( { slug: req.params.slug }, permission, function( status ) {
+	Permissions.updateOne( { slug: req.params.slug }, permission, function( status ) {
 		req.flash( 'success', 'permission-updated' );
 		res.redirect( app.parent.mountpath + app.mountpath );
 	} );

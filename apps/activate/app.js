@@ -81,7 +81,7 @@ app.post( '/', function( req, res ) {
 					return;
 				}
 
-				Members.update( {
+				Members.updateOne( {
 					_id: user._id,
 					'password.hash': hash
 				}, {

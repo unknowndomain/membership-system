@@ -27,7 +27,7 @@ Members.find( {
 					if ( err && err.error && err.error.message == 'Resource not found' ) remove = true;
 					if ( remove ) {
 						console.log( 'Removed Subscription:  ' + subscription_id );
-						Members.update( { 'gocardless.subscription_id': subscription_id }, { $unset: { 'gocardless.subscription_id': true } }, function() {} );
+						Members.updateOne( { 'gocardless.subscription_id': subscription_id }, { $unset: { 'gocardless.subscription_id': true } }, function() {} );
 					}
 				} );
 			}.bind( { subscription_id: member.gocardless.subscription_id } ) );
@@ -42,7 +42,7 @@ Members.find( {
 					if ( err && err.error && err.error.message == 'Resource not found' ) remove = true;
 					if ( remove ) {
 						console.log( 'Removed Mandate:       ' + mandate_id );
-						Members.update( { 'gocardless.mandate_id': mandate_id }, { $unset: { 'gocardless.mandate_id': true } }, function() {} );
+						Members.updateOne( { 'gocardless.mandate_id': mandate_id }, { $unset: { 'gocardless.mandate_id': true } }, function() {} );
 					}
 				} );
 			}.bind( { mandate_id: member.gocardless.mandate_id } ) );

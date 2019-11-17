@@ -123,7 +123,7 @@ app.post( '/:id/edit', auth.isSuperAdmin, function( req, res ) {
 		capabilities: req.body.capabilities
 	};
 
-	APIKeys.update( { _id: req.params.id }, apikey, function( status ) {
+	APIKeys.updateOne( { _id: req.params.id }, apikey, function( status ) {
 		req.flash( 'success', 'apikey-update' );
 		res.redirect( app.parent.mountpath + app.mountpath );
 	} );

@@ -42,7 +42,7 @@ app.post( '/', auth.isLoggedIn, function( req, res ) {
 		}
 	};
 
-	Members.update( { _id: req.user._id }, { $set: profile }, { runValidators: true }, function( status ) {
+	Members.updateOne( { _id: req.user._id }, { $set: profile }, { runValidators: true }, function( status ) {
 		if ( status ) {
 			req.log.debug( {
 				app: 'profile',

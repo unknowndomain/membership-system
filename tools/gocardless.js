@@ -32,11 +32,11 @@ Members.find( { $or:
 					if ( ! subscription ) remove = true;
 					if ( remove ) {
 						console.log( 'Removed Subscription:  ' + subscription_id );
-						Members.update( { 'gocardless.subscription_id': subscription_id }, { $unset: { 'gocardless.subscription_id': true, 'gocardless.amount': true } }, function() {} );
+						Members.updateOne( { 'gocardless.subscription_id': subscription_id }, { $unset: { 'gocardless.subscription_id': true, 'gocardless.amount': true } }, function() {} );
 					} else {
 						subscription.amount /= 100;
 						console.log( 'Updating subscription amount to: £' + subscription.amount + ' for ID: ' + subscription_id );
-						Members.update( { 'gocardless.subscription_id': subscription_id }, { $set: { 'gocardless.amount': subscription.amount } }, function() {} );
+						Members.updateOne( { 'gocardless.subscription_id': subscription_id }, { $set: { 'gocardless.amount': subscription.amount } }, function() {} );
 					}
 				} );
 			}.bind( { subscription_id: member.gocardless.subscription_id } ) );
@@ -52,7 +52,7 @@ Members.find( { $or:
 					if ( ! mandate ) remove = true;
 					if ( remove ) {
 						console.log( 'Removed Mandate:       ' + mandate_id );
-						Members.update( { 'gocardless.mandate_id': mandate_id }, { $unset: { 'gocardless.mandate_id': true, 'gocardless.next_possible_charge_date': true } }, function() {} );
+						Members.updateOne( { 'gocardless.mandate_id': mandate_id }, { $unset: { 'gocardless.mandate_id': true, 'gocardless.next_possible_charge_date': true } }, function() {} );
 					}
 				} );
 			}.bind( { mandate_id: member.gocardless.mandate_id } ) );

@@ -144,7 +144,7 @@ app.post( '/:slug/edit', auth.isSuperAdmin, function( req, res ) {
 		presentTense: req.body.presentTense
 	};
 
-	States.update( { slug: req.params.slug }, state, function( status ) {
+	States.updateOne( { slug: req.params.slug }, state, function( status ) {
 		req.flash( 'success', 'state-updated' );
 		res.redirect( app.parent.mountpath + app.mountpath );
 	} );

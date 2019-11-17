@@ -76,7 +76,7 @@ app.post( '/link', auth.isLoggedIn, function( req, res ) {
 								auth.generateActivationCode( function( code ) {
 									code = code.toString( 'hex' );
 
-									Members.update( { "_id": req.user._id }, { $set: {
+									Members.updateOne( { "_id": req.user._id }, { $set: {
 										"discourse.username": user.username,
 										"discourse.activation_code": code
 									} }, function ( error ) {} );
@@ -119,7 +119,7 @@ app.get( '/cancel', auth.isLoggedIn, function( req, res ) {
 app.post( '/activate', auth.isLoggedIn, function( req, res ) {
 	if ( ! req.body.activation_code || req.body.activation_code !== '' ) {
 		if ( req.body.activation_code == req.user.discourse.activation_code ) {
-			Members.update( { "_id": req.user._id }, { $set: {
+			Members.updateOne( { "_id": req.user._id }, { $set: {
 				"discourse.activated": true,
 				"discourse.activation_code": null
 			} }, function ( error ) {} );

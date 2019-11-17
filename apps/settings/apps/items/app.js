@@ -188,7 +188,7 @@ app.post( '/:slug/edit', auth.isSuperAdmin, function( req, res ) {
 		defaultState: req.body.defaultState
 	};
 
-	Items.update( { slug: req.params.slug }, item, function( status ) {
+	Items.updateOne( { slug: req.params.slug }, item, function( status ) {
 		req.log.debug( {
 			app: 'settings/items',
 			action: 'edit',
