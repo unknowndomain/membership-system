@@ -456,7 +456,6 @@ app.post( '/:uuid/discourse', auth.isSuperAdmin, function( req, res ) {
 	// 		res.redirect( app.mountpath + '/' + req.params.uuid + '/discourse' );
 	// 	} else {
 			Members.updateOne({uuid: req.params.uuid }, { $set: member }, function( status ) {
-				console.log(status);
 				req.flash( 'success', 'discourse-updated' );
 				res.redirect( app.mountpath + '/' + req.params.uuid + '/discourse' );
 			} );
