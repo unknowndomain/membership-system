@@ -16,9 +16,10 @@ exports.mongoose = mongoose;
 
 exports.connect = function( url ) {
 	mongoose.Promise = global.Promise;
-	mongoose.connect( url, {
-		useMongoClient: true
-	} );
+	mongoose.set('useNewUrlParser', true);
+	mongoose.set('useUnifiedTopology', true);
+	mongoose.set('useCreateIndex', true);
+	mongoose.connect( url );
 	var db = mongoose.connection;
 	db.on( 'connected', function( error ) {
 		log.debug( {
