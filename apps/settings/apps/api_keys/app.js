@@ -130,7 +130,7 @@ app.post( '/:id/edit', auth.isSuperAdmin, function( req, res ) {
 } );
 
 app.post( '/:id/delete', auth.isSuperAdmin, function( req, res ) {
-	APIKeys.remove( { _id: req.params.id }, function( err ) {
+	APIKeys.deleteOne( { _id: req.params.id }, function( err ) {
 		req.flash( 'success', 'apikey-delete' );
 		res.redirect( app.parent.mountpath + app.mountpath );
 	} );

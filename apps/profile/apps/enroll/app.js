@@ -64,7 +64,7 @@ app.post( '/', auth.isLoggedIn, function( req, res ) {
 
 			Members.findOne( { 'tag.id': record.tag }, function( err, member ) {
 				if ( member ) {
-					record.remove( function( error ) {} );
+					record.deleteOne( function( error ) {} );
 					req.flash( 'danger', 'enroll-tag-dupe' );
 					res.redirect( '/profile/tag' );
 					return;
@@ -74,7 +74,7 @@ app.post( '/', auth.isLoggedIn, function( req, res ) {
 				var monthFromToday = moment().subtract( 1, 'months' );
 
 				if ( created.isBefore( monthFromToday ) ) {
-					record.remove( function( error ) {} );
+					record.deleteOne( function( error ) {} );
 					req.flash( 'danger', 'enroll-expired' );
 					res.redirect( app.parent.mountpath + app.mountpath );
 					return;
@@ -108,7 +108,7 @@ app.post( '/', auth.isLoggedIn, function( req, res ) {
 							console.log( 'Granting "' + req.user.email + '" access permission' );
 						}
 
-						record.remove( function( error ) {} );
+						record.deleteOne( function( error ) {} );
 						req.flash( 'success', 'enroll-success' );
 						res.redirect( '/profile/tag' );
 					} );

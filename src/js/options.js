@@ -85,7 +85,7 @@ var Options = {
 		OptionsDB.updateOne( { key: key }, { value: Options.getText( key ) }, { upsert: true }, function( err, status ) {} );
 	},
 	_unset: function( key ) {
-		OptionsDB.remove( { key: key }, function( err, status ) {} );
+		OptionsDB.deleteOne( { key: key }, function( err, status ) {} );
 	},
 	load: function( req, res, next ) {
 		res.locals.Options = Options.getText;

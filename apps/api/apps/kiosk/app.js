@@ -89,7 +89,7 @@ app.get('/enroll', auth.apiCan( 'api-enroll-tag' ), function(req, res) {
 
 		Enroll.findOne({
 			tag: req.query.tag
-		}).remove().exec(); //, function( err, record ) {
+		}).deleteOne().exec(); //, function( err, record ) {
 		auth.generateActivationCode(function(code) {
 			new Enroll({
 				tag: req.query.tag,
