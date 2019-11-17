@@ -442,23 +442,26 @@ app.get( '/:uuid/discourse', auth.isSuperAdmin, function( req, res ) {
 
 app.post( '/:uuid/discourse', auth.isSuperAdmin, function( req, res ) {
 	var member = {
-		'discourse.username': req.body.username,
-		'discourse.activated': ( req.body.activated ? true : false )
+		discourse: {
+			'username': req.body.username,
+			'activated': ( req.body.activated == 'activated' ? true : false )
+		}
 	};
 
-	if ( req.body.activated ) member['discourse.activation_code'] = null;
+	if ( member.discourse.activated ) member.discourse.activation_code = null;
 
-	Members.findOne( { "discourse.username": req.body.username }, function( err, member ) {
-		if ( member ) {
-			req.flash( 'warning', 'discouse-username-duplicate' );
-			res.redirect( app.mountpath + '/' + req.params.uuid + '/discourse' );
-		} else {
-			Members.update( { uuid: req.params.uuid }, { $set: member }, function( status ) {
+	// Members.findOne({'discourse.username': req.body.username}, function( err, discourse ) {
+	// 	if ( discourse ) {
+	// 		req.flash( 'warning', 'discouse-username-duplicate' );
+	// 		res.redirect( app.mountpath + '/' + req.params.uuid + '/discourse' );
+	// 	} else {
+			Members.updateOne({uuid: req.params.uuid }, { $set: member }, function( status ) {
+				console.log(status);
 				req.flash( 'success', 'discourse-updated' );
 				res.redirect( app.mountpath + '/' + req.params.uuid + '/discourse' );
 			} );
-		}
-	} );
+	// 	}
+	// } );
 } );
 
 app.get( '/:uuid/gocardless', auth.isSuperAdmin, function( req, res ) {
